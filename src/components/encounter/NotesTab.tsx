@@ -4,24 +4,14 @@ import { useMemo } from "react";
 import { useCampaignPlayerNotes } from "@/hooks/useCampaignPlayerNotes";
 
 export function NotesTab({ campaignId }: { campaignId: string }) {
-  const {
-    value,
-    setValue,
-    isLoading,
-    isSaving,
-    lastSavedAt,
-    error,
-    saveNow,
-  } = useCampaignPlayerNotes(campaignId);
+  const { state, setValue, flushSave } = useCampaignPlayerNotes(campaignId);
+  const { value, isLoading, isSaving, lastSavedAt, error } = state;
 
   const savedLabel = useMemo(() => {
     if (!lastSavedAt) return "";
-    try {
-      const d = new Date(lastSavedAt);
-      return `Last saved: ${d.toLocaleString()}`;
-    } catch {
-      return "";
-    }
+    const d = new Date(lastSavedAt);
+    if (Number.isNaN(d.getTime())) return "";
+    return `Last saved: ${d.toLocaleString()}`;
   }, [lastSavedAt]);
 
   return (
@@ -33,7 +23,7 @@ export function NotesTab({ campaignId }: { campaignId: string }) {
 
         <button
           type="button"
-          onClick={() => void saveNow()}
+          onClick={() => void flushSave(value ?? "")}
           className="rounded-md border px-3 py-1 text-sm hover:bg-black/5"
           disabled={isLoading || isSaving}
           title="Force save now"
@@ -51,7 +41,7 @@ export function NotesTab({ campaignId }: { campaignId: string }) {
       <textarea
         className="min-h-[220px] w-full resize-y rounded-md border p-3 text-sm outline-none"
         placeholder="Write anything you want here. These notes persist across encounters."
-        value={value}
+        value={value ?? ""}
         onChange={(e) => setValue(e.target.value)}
         disabled={isLoading}
       />

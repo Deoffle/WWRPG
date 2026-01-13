@@ -1,0 +1,457 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/app/c/[campaignId]",
+      "regex": "^/app/c/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/backup",
+      "regex": "^/app/c/([^/]+?)/backup(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/backup(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/bestiary",
+      "regex": "^/app/c/([^/]+?)/bestiary(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/bestiary(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/cards",
+      "regex": "^/app/c/([^/]+?)/cards(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/cards(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/cards/[cardId]",
+      "regex": "^/app/c/([^/]+?)/cards/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId",
+        "nxtPcardId": "nxtPcardId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/cards/(?<nxtPcardId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/characters",
+      "regex": "^/app/c/([^/]+?)/characters(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/characters(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/characters/[characterId]",
+      "regex": "^/app/c/([^/]+?)/characters/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId",
+        "nxtPcharacterId": "nxtPcharacterId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/characters/(?<nxtPcharacterId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/decks",
+      "regex": "^/app/c/([^/]+?)/decks(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/decks(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/decks/[deckId]",
+      "regex": "^/app/c/([^/]+?)/decks/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId",
+        "nxtPdeckId": "nxtPdeckId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/decks/(?<nxtPdeckId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/dm",
+      "regex": "^/app/c/([^/]+?)/dm(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/dm(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/members",
+      "regex": "^/app/c/([^/]+?)/members(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/members(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/monsters",
+      "regex": "^/app/c/([^/]+?)/monsters(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/monsters(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/monsters/[monsterId]",
+      "regex": "^/app/c/([^/]+?)/monsters/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId",
+        "nxtPmonsterId": "nxtPmonsterId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/monsters/(?<nxtPmonsterId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/app/c/[campaignId]/play",
+      "regex": "^/app/c/([^/]+?)/play(?:/)?$",
+      "routeKeys": {
+        "nxtPcampaignId": "nxtPcampaignId"
+      },
+      "namedRegex": "^/app/c/(?<nxtPcampaignId>[^/]+?)/play(?:/)?$"
+    },
+    {
+      "page": "/join/[code]",
+      "regex": "^/join/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcode": "nxtPcode"
+      },
+      "namedRegex": "^/join/(?<nxtPcode>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/auth/logout",
+      "regex": "^/api/auth/logout(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/logout(?:/)?$"
+    },
+    {
+      "page": "/api/bestiary/push",
+      "regex": "^/api/bestiary/push(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/bestiary/push(?:/)?$"
+    },
+    {
+      "page": "/api/campaigns/create",
+      "regex": "^/api/campaigns/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/campaigns/create(?:/)?$"
+    },
+    {
+      "page": "/api/campaigns/delete",
+      "regex": "^/api/campaigns/delete(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/campaigns/delete(?:/)?$"
+    },
+    {
+      "page": "/api/campaigns/export",
+      "regex": "^/api/campaigns/export(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/campaigns/export(?:/)?$"
+    },
+    {
+      "page": "/api/campaigns/import",
+      "regex": "^/api/campaigns/import(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/campaigns/import(?:/)?$"
+    },
+    {
+      "page": "/api/cards/create",
+      "regex": "^/api/cards/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cards/create(?:/)?$"
+    },
+    {
+      "page": "/api/cards/push",
+      "regex": "^/api/cards/push(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cards/push(?:/)?$"
+    },
+    {
+      "page": "/api/cards/update",
+      "regex": "^/api/cards/update(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cards/update(?:/)?$"
+    },
+    {
+      "page": "/api/cards/upload-image",
+      "regex": "^/api/cards/upload\\-image(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/cards/upload\\-image(?:/)?$"
+    },
+    {
+      "page": "/api/characters/character-sheet/save",
+      "regex": "^/api/characters/character\\-sheet/save(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/characters/character\\-sheet/save(?:/)?$"
+    },
+    {
+      "page": "/api/characters/create",
+      "regex": "^/api/characters/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/characters/create(?:/)?$"
+    },
+    {
+      "page": "/api/characters/items/save",
+      "regex": "^/api/characters/items/save(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/characters/items/save(?:/)?$"
+    },
+    {
+      "page": "/api/characters/set-npc",
+      "regex": "^/api/characters/set\\-npc(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/characters/set\\-npc(?:/)?$"
+    },
+    {
+      "page": "/api/decks/create",
+      "regex": "^/api/decks/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/decks/create(?:/)?$"
+    },
+    {
+      "page": "/api/decks/set-card",
+      "regex": "^/api/decks/set\\-card(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/decks/set\\-card(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/character/add",
+      "regex": "^/api/encounter/dm/character/add(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/character/add(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/set-death-saves",
+      "regex": "^/api/encounter/dm/combatant/set\\-death\\-saves(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/set\\-death\\-saves(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/set-hp",
+      "regex": "^/api/encounter/dm/combatant/set\\-hp(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/set\\-hp(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/set-initiative",
+      "regex": "^/api/encounter/dm/combatant/set\\-initiative(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/set\\-initiative(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/status/add",
+      "regex": "^/api/encounter/dm/combatant/status/add(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/status/add(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/status/remove",
+      "regex": "^/api/encounter/dm/combatant/status/remove(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/status/remove(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/toggle-defeated",
+      "regex": "^/api/encounter/dm/combatant/toggle\\-defeated(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/toggle\\-defeated(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/combatant/toggle-hidden",
+      "regex": "^/api/encounter/dm/combatant/toggle\\-hidden(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/combatant/toggle\\-hidden(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/end",
+      "regex": "^/api/encounter/dm/end(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/end(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/enemy/add",
+      "regex": "^/api/encounter/dm/enemy/add(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/enemy/add(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/log/add",
+      "regex": "^/api/encounter/dm/log/add(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/log/add(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/start",
+      "regex": "^/api/encounter/dm/start(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/start(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/turn/next",
+      "regex": "^/api/encounter/dm/turn/next(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/turn/next(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/dm/undo-last-action",
+      "regex": "^/api/encounter/dm/undo\\-last\\-action(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/dm/undo\\-last\\-action(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/play/campaign-player-notes",
+      "regex": "^/api/encounter/play/campaign\\-player\\-notes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/play/campaign\\-player\\-notes(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/play/draw-to-limit",
+      "regex": "^/api/encounter/play/draw\\-to\\-limit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/play/draw\\-to\\-limit(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/play/hand",
+      "regex": "^/api/encounter/play/hand(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/play/hand(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/play/hand/to-discard",
+      "regex": "^/api/encounter/play/hand/to\\-discard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/play/hand/to\\-discard(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/play/log-card",
+      "regex": "^/api/encounter/play/log\\-card(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/play/log\\-card(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/play/set-hp-current",
+      "regex": "^/api/encounter/play/set\\-hp\\-current(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/play/set\\-hp\\-current(?:/)?$"
+    },
+    {
+      "page": "/api/encounter/quest-log",
+      "regex": "^/api/encounter/quest\\-log(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/encounter/quest\\-log(?:/)?$"
+    },
+    {
+      "page": "/api/invites/create",
+      "regex": "^/api/invites/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/invites/create(?:/)?$"
+    },
+    {
+      "page": "/api/members/assign-character",
+      "regex": "^/api/members/assign\\-character(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/members/assign\\-character(?:/)?$"
+    },
+    {
+      "page": "/api/monsters/create",
+      "regex": "^/api/monsters/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/monsters/create(?:/)?$"
+    },
+    {
+      "page": "/api/monsters/delete",
+      "regex": "^/api/monsters/delete(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/monsters/delete(?:/)?$"
+    },
+    {
+      "page": "/api/monsters/update",
+      "regex": "^/api/monsters/update(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/monsters/update(?:/)?$"
+    },
+    {
+      "page": "/app/campaigns",
+      "regex": "^/app/campaigns(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/app/campaigns(?:/)?$"
+    },
+    {
+      "page": "/auth/login",
+      "regex": "^/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth/login(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
