@@ -1,29 +1,27 @@
 /* src/app/page.module.css */
 
-/* Always-defined knobs */
-:root {
-  --bg-fade: 2.2s;            /* slower and readable */
-  --bg-delay: 0.12s;          /* small beat before fade begins */
-  --intro-delay: 2.6s;        /* title comes after bg fade begins */
-  --sparkle-strength: 0.90;
-  --vignette-dark: 0.78;
-  --vignette-top: 0.28;
-
-  --leave-text: 420ms;        /* how long the text fades out */
-  --letter-delay: 280ms;      /* wait after click before letter starts */
-  --letter-rise: 900ms;       /* letter slide duration */
-}
-
-
 .stage {
+  /* Local knobs */
+  --bgDur: 4400ms;
+  --textDelay: 1500ms;
+  --textDur: 2700ms;
+  --sparkleStrength: 1;
+
+  --vignetteDark: 0.78;
+  --vignetteTop: 0.28;
+
+  --leaveFade: 720ms;
+  --letterDelay: 860ms;
+  --letterDur: 2900ms;
+
   position: relative;
   min-height: 100vh;
   overflow: hidden;
   color: #fff;
-  background: #000; /* hard fallback */
+  background: #000;
 }
 
-/* Background image layer */
+/* Background layer */
 .bg {
   position: absolute;
   inset: 0;
@@ -40,39 +38,40 @@
 
   opacity: 0;
   transform: scale(1.02);
+  transition: opacity var(--bgDur) ease, transform var(--bgDur) ease;
   will-change: opacity, transform;
 }
 
-/* vignette overlay */
 .bgVignette {
   position: absolute;
   inset: 0;
   background:
     radial-gradient(
       ellipse at top,
-      rgba(20, 30, 60, var(--vignette-top)),
-      rgba(0, 0, 0, var(--vignette-dark))
+      rgba(20, 30, 60, var(--vignetteTop)),
+      rgba(0, 0, 0, var(--vignetteDark))
     ),
     linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.10),
-      rgba(0, 0, 0, var(--vignette-dark))
+      rgba(0, 0, 0, var(--vignetteDark))
     );
-
   opacity: 0;
+  transition: opacity var(--bgDur) ease;
   will-change: opacity;
 }
 
-/* black overlay to guarantee "black -> dark" */
+/* Always starts fully black, fades away */
 .blackFade {
   position: absolute;
   inset: 0;
   background: #000;
   opacity: 1;
+  transition: opacity var(--bgDur) ease;
   will-change: opacity;
 }
 
-/* Sparkles overlay */
+/* Sparkles */
 .sparkles {
   position: absolute;
   inset: 0;
@@ -85,35 +84,64 @@
   position: absolute;
   left: -10%;
   top: -10%;
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   border-radius: 999px;
-  background: rgba(120, 170, 255, 0.8);
+  background: rgba(170, 205, 255, 0.95);
 
   box-shadow:
-    10vw 15vh rgba(120, 170, 255, 0.75),
-    18vw 42vh rgba(120, 170, 255, 0.55),
-    25vw 22vh rgba(120, 170, 255, 0.65),
-    32vw 70vh rgba(120, 170, 255, 0.50),
-    40vw 30vh rgba(120, 170, 255, 0.70),
-    48vw 55vh rgba(120, 170, 255, 0.55),
-    55vw 18vh rgba(120, 170, 255, 0.65),
-    62vw 62vh rgba(120, 170, 255, 0.55),
-    70vw 25vh rgba(120, 170, 255, 0.70),
-    78vw 48vh rgba(120, 170, 255, 0.50),
-    85vw 68vh rgba(120, 170, 255, 0.60),
-    92vw 35vh rgba(120, 170, 255, 0.55),
-    12vw 78vh rgba(120, 170, 255, 0.45),
-    28vw 85vh rgba(120, 170, 255, 0.55),
-    44vw 82vh rgba(120, 170, 255, 0.50),
-    60vw 88vh rgba(120, 170, 255, 0.45),
-    76vw 84vh rgba(120, 170, 255, 0.55),
-    90vw 80vh rgba(120, 170, 255, 0.45);
+    /* original-ish */
+    10vw 15vh rgba(170, 205, 255, 0.95),
+    18vw 42vh rgba(170, 205, 255, 0.70),
+    25vw 22vh rgba(170, 205, 255, 0.85),
+    32vw 70vh rgba(170, 205, 255, 0.65),
+    40vw 30vh rgba(170, 205, 255, 0.90),
+    48vw 55vh rgba(170, 205, 255, 0.70),
+    55vw 18vh rgba(170, 205, 255, 0.85),
+    62vw 62vh rgba(170, 205, 255, 0.70),
+    70vw 25vh rgba(170, 205, 255, 0.90),
+    78vw 48vh rgba(170, 205, 255, 0.65),
+    85vw 68vh rgba(170, 205, 255, 0.80),
+    92vw 35vh rgba(170, 205, 255, 0.70),
+
+    /* extra density */
+    6vw 28vh rgba(170, 205, 255, 0.60),
+    8vw 62vh rgba(170, 205, 255, 0.55),
+    14vw 10vh rgba(170, 205, 255, 0.55),
+    16vw 74vh rgba(170, 205, 255, 0.50),
+    20vw 58vh rgba(170, 205, 255, 0.60),
+    22vw 34vh rgba(170, 205, 255, 0.55),
+    26vw 12vh rgba(170, 205, 255, 0.50),
+    30vw 40vh rgba(170, 205, 255, 0.60),
+    34vw 16vh rgba(170, 205, 255, 0.55),
+    36vw 86vh rgba(170, 205, 255, 0.50),
+    38vw 64vh rgba(170, 205, 255, 0.55),
+    42vw 8vh rgba(170, 205, 255, 0.55),
+    46vw 24vh rgba(170, 205, 255, 0.55),
+    50vw 72vh rgba(170, 205, 255, 0.55),
+    52vw 38vh rgba(170, 205, 255, 0.55),
+    56vw 10vh rgba(170, 205, 255, 0.50),
+    58vw 50vh rgba(170, 205, 255, 0.60),
+    64vw 14vh rgba(170, 205, 255, 0.55),
+    66vw 44vh rgba(170, 205, 255, 0.55),
+    72vw 58vh rgba(170, 205, 255, 0.55),
+    74vw 8vh rgba(170, 205, 255, 0.50),
+    80vw 20vh rgba(170, 205, 255, 0.55),
+    82vw 54vh rgba(170, 205, 255, 0.55),
+    86vw 30vh rgba(170, 205, 255, 0.55),
+    88vw 76vh rgba(170, 205, 255, 0.50),
+    94vw 60vh rgba(170, 205, 255, 0.55),
+    96vw 18vh rgba(170, 205, 255, 0.50);
 
   opacity: 0;
-  filter: drop-shadow(0 0 8px rgba(120, 170, 255, 0.35));
-  will-change: opacity, transform;
+  transition: opacity 900ms ease;
+
+  /* MUCH stronger glow */
+  filter:
+    drop-shadow(0 0 12px rgba(120, 170, 255, 0.75))
+    drop-shadow(0 0 28px rgba(120, 170, 255, 0.45));
 }
+
 
 /* Content */
 .content {
@@ -130,11 +158,9 @@
   text-align: center;
   padding: 28px 22px;
   background: transparent;
-  border: none;
-  box-shadow: none;
 }
 
-/* Top-right hub button */
+/* Hub button */
 .hubBtn {
   position: absolute;
   top: 18px;
@@ -143,6 +169,7 @@
 
   opacity: 0;
   transform: translateY(-8px);
+  transition: opacity var(--textDur) ease, transform var(--textDur) ease;
 }
 
 .hubBtn a {
@@ -158,30 +185,29 @@
   font-size: 14px;
 }
 
-.hubBtn a:hover {
-  transform: translateY(-1px);
-  transition: transform 120ms ease;
+/* Text blocks start hidden */
+.title,
+.tagline,
+.actions {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--textDur) ease var(--textDelay),
+    transform var(--textDur) ease;
 }
 
-/* Text */
 .title {
   font-size: clamp(44px, 6vw, 64px);
   margin: 0;
   letter-spacing: 0.5px;
-  opacity: 0;
-  transform: translateY(14px);
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
-  will-change: opacity, transform;
 }
 
 .tagline {
   margin: 10px 0 0;
   font-size: clamp(16px, 2.1vw, 19px);
   color: rgba(235, 245, 255, 0.85);
-  opacity: 0;
-  transform: translateY(14px);
   text-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
-  will-change: opacity, transform;
 }
 
 .actions {
@@ -190,9 +216,6 @@
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
-  opacity: 0;
-  transform: translateY(14px);
-  will-change: opacity, transform;
 }
 
 /* Button */
@@ -221,17 +244,9 @@
   object-fit: contain;
   transform: rotate(-4deg);
   filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25));
-  flex: 0 0 auto;
 }
 
-/* Leaving: fade content out */
-.leaving .card {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.99);
-  transition: opacity var(--leave-text) ease, transform var(--leave-text) ease;
-}
-
-/* Letter overlay for leaving animation (85% viewport height) */
+/* Letter overlay (hidden until leaving) */
 .letterOverlay {
   position: absolute;
   left: 50%;
@@ -240,12 +255,13 @@
   height: 85vh;
   z-index: 4;
   pointer-events: none;
-  display: grid;
-  place-items: center;
 
-  opacity: 0;
+  opacity: 0.9;
   transform: translate(-50%, 120%) rotate(-1deg);
-  will-change: transform, opacity;
+  transition:
+    opacity var(--letterDur) ease var(--letterDelay),
+    transform var(--letterDur) cubic-bezier(0.2, 0.9, 0.2, 1) var(--letterDelay);
+  will-change: opacity, transform;
 }
 
 .letterImg {
@@ -255,139 +271,45 @@
   filter: drop-shadow(0 22px 70px rgba(0, 0, 0, 0.65));
 }
 
-/* READY (intro animations) */
-.ready .bgImg {
-  animation: bgFadeIn var(--bg-fade) ease-out var(--bg-delay) forwards;
+/* Phase progression (CUMULATIVE classes now) */
+.phase1 .bgImg {
+  opacity: 1;
+  transform: scale(1);
+}
+.phase1 .bgVignette {
+  opacity: 1;
+}
+.phase1 .blackFade {
+  opacity: 0;
+}
+.phase1 .sparkles::before {
+  opacity: var(--sparkleStrength);
 }
 
-.ready .bgVignette {
-  animation: vignetteIn var(--bg-fade) ease-out var(--bg-delay) forwards;
+.phase2 .title {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.ready .blackFade {
-  animation: blackFadeOut var(--bg-fade) ease-out var(--bg-delay) forwards;
+.phase3 .tagline {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Sparkles appear after background starts */
-.ready .sparkles::before {
-  animation:
-    sparkleIn 900ms ease-out calc(var(--bg-delay) + 1.2s) forwards,
-    twinkle 3.5s ease-in-out calc(var(--bg-delay) + 1.8s) infinite;
+.phase4 .actions,
+.phase4 .hubBtn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Staggered intro */
-.ready .title {
-  animation: contentIn 800ms ease-out var(--intro-delay) forwards;
-}
-.ready .tagline {
-  animation: contentIn 800ms ease-out calc(var(--intro-delay) + 0.24s) forwards;
-}
-.ready .actions {
-  animation: contentIn 800ms ease-out calc(var(--intro-delay) + 0.50s) forwards;
-}
-.ready .hubBtn {
-  animation: contentIn 800ms ease-out calc(var(--intro-delay) + 0.62s) forwards;
+/* Leaving (fade content, slide letter) */
+.leaving .card {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.99);
+  transition: opacity var(--leaveFade) ease, transform var(--leaveFade) ease;
 }
 
-/* Leaving letter slide */
 .leaving .letterOverlay {
-  animation: letterRise var(--letter-rise) cubic-bezier(0.2, 0.9, 0.2, 1) var(--letter-delay) forwards;
-}
-
-/* Motion accessibility */
-@media (prefers-reduced-motion: reduce) {
-  /* Kill animations */
-  .bgImg,
-  .bgVignette,
-  .blackFade,
-  .sparkles::before,
-  .title,
-  .tagline,
-  .actions,
-  .hubBtn,
-  .letterOverlay {
-    animation: none !important;
-  }
-
-  /* Show the final intended background (NOT black) */
-  .bgImg {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .bgVignette {
-    opacity: 1 !important;
-  }
-
-  /* Remove the black overlay completely */
-  .blackFade {
-    opacity: 0 !important;
-  }
-
-  /* Show content immediately */
-  .title,
-  .tagline,
-  .actions,
-  .hubBtn {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* Keep the letter hidden unless leaving */
-  .letterOverlay {
-    opacity: 0 !important;
-    transform: translate(-50%, 120%) rotate(-1deg) !important;
-  }
-
-  .leaving .letterOverlay {
-    opacity: 0.9 !important;
-    transform: translate(-50%, -50%) rotate(-1deg) !important;
-  }
-
-  /* Optional: either show sparkles softly or hide them completely */
-  .sparkles::before {
-    opacity: var(--sparkle-strength) !important;
-    transform: none !important;
-  }
-}
-
-
-/* Keyframes */
-@keyframes bgFadeIn {
-  from { opacity: 0; transform: scale(1.02); }
-  to   { opacity: 1; transform: scale(1.00); }
-}
-
-@keyframes vignetteIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes blackFadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
-@keyframes contentIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes sparkleIn {
-  to { opacity: var(--sparkle-strength); }
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.55; transform: translate(0, 0); }
-  50%      { opacity: 1; transform: translate(10px, 6px); }
-}
-
-@keyframes letterRise {
-  from {
-    transform: translate(-50%, 120%) rotate(-1deg);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(-1deg);
-    opacity: 0.9;
-  }
+  opacity: 0.9;
+  transform: translate(-50%, -50%) rotate(-1deg);
 }

@@ -45,26 +45,58 @@
   position: absolute;
   left: -10%;
   top: -10%;
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   border-radius: 999px;
   background: rgba(120, 170, 255, 0.8);
   box-shadow:
-    10vw 15vh rgba(120, 170, 255, 0.75),
-    18vw 42vh rgba(120, 170, 255, 0.55),
-    25vw 22vh rgba(120, 170, 255, 0.65),
-    32vw 70vh rgba(120, 170, 255, 0.50),
-    40vw 30vh rgba(120, 170, 255, 0.70),
-    48vw 55vh rgba(120, 170, 255, 0.55),
-    55vw 18vh rgba(120, 170, 255, 0.65),
-    62vw 62vh rgba(120, 170, 255, 0.55),
-    70vw 25vh rgba(120, 170, 255, 0.70),
-    78vw 48vh rgba(120, 170, 255, 0.50),
-    85vw 68vh rgba(120, 170, 255, 0.60),
-    92vw 35vh rgba(120, 170, 255, 0.55);
-  opacity: 0.9;
+    /* original-ish */
+    10vw 15vh rgba(170, 205, 255, 0.95),
+    18vw 42vh rgba(170, 205, 255, 0.70),
+    25vw 22vh rgba(170, 205, 255, 0.85),
+    32vw 70vh rgba(170, 205, 255, 0.65),
+    40vw 30vh rgba(170, 205, 255, 0.90),
+    48vw 55vh rgba(170, 205, 255, 0.70),
+    55vw 18vh rgba(170, 205, 255, 0.85),
+    62vw 62vh rgba(170, 205, 255, 0.70),
+    70vw 25vh rgba(170, 205, 255, 0.90),
+    78vw 48vh rgba(170, 205, 255, 0.65),
+    85vw 68vh rgba(170, 205, 255, 0.80),
+    92vw 35vh rgba(170, 205, 255, 0.70),
+
+    /* extra density */
+    6vw 28vh rgba(170, 205, 255, 0.60),
+    8vw 62vh rgba(170, 205, 255, 0.55),
+    14vw 10vh rgba(170, 205, 255, 0.55),
+    16vw 74vh rgba(170, 205, 255, 0.50),
+    20vw 58vh rgba(170, 205, 255, 0.60),
+    22vw 34vh rgba(170, 205, 255, 0.55),
+    26vw 12vh rgba(170, 205, 255, 0.50),
+    30vw 40vh rgba(170, 205, 255, 0.60),
+    34vw 16vh rgba(170, 205, 255, 0.55),
+    36vw 86vh rgba(170, 205, 255, 0.50),
+    38vw 64vh rgba(170, 205, 255, 0.55),
+    42vw 8vh rgba(170, 205, 255, 0.55),
+    46vw 24vh rgba(170, 205, 255, 0.55),
+    50vw 72vh rgba(170, 205, 255, 0.55),
+    52vw 38vh rgba(170, 205, 255, 0.55),
+    56vw 10vh rgba(170, 205, 255, 0.50),
+    58vw 50vh rgba(170, 205, 255, 0.60),
+    64vw 14vh rgba(170, 205, 255, 0.55),
+    66vw 44vh rgba(170, 205, 255, 0.55),
+    72vw 58vh rgba(170, 205, 255, 0.55),
+    74vw 8vh rgba(170, 205, 255, 0.50),
+    80vw 20vh rgba(170, 205, 255, 0.55),
+    82vw 54vh rgba(170, 205, 255, 0.55),
+    86vw 30vh rgba(170, 205, 255, 0.55),
+    88vw 76vh rgba(170, 205, 255, 0.50),
+    94vw 60vh rgba(170, 205, 255, 0.55),
+    96vw 18vh rgba(170, 205, 255, 0.50);
+  opacity: 1;
   animation: twinkle 3.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(120, 170, 255, 0.35));
+  filter:
+    drop-shadow(0 0 12px rgba(120, 170, 255, 0.75))
+    drop-shadow(0 0 28px rgba(120, 170, 255, 0.45));
 }
 
 .content {
@@ -80,10 +112,10 @@
 .letterBg {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 42%;
   transform: translate(-50%, -50%) rotate(-1deg);
   width: min(900px, 98vw);
-  height: min(980px, 150vh);
+  height: 85vh;
   z-index: 1;
   opacity: 0.9;
   pointer-events: none;
@@ -92,8 +124,8 @@
 }
 
 .letterBgImg {
-  width: 100%;
-  height: 100%;
+  width: 84%;
+  height: 84%;
   object-fit: contain;
   filter: drop-shadow(0 22px 70px rgba(0, 0, 0, 0.65));
 }

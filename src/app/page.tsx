@@ -10,83 +10,104 @@ const BG_IMAGE_SRC = "/landing/hogwarts-like-castle.jpg";
 const LETTER_IMAGE_SRC = "/landing/acceptance-letter.png";
 const LETTER_SMALL_IMAGE_SRC = "/landing/small-acceptance-letter.png";
 
+type Phase = 0 | 1 | 2 | 3 | 4;
+
 export default function Home() {
   const router = useRouter();
 
-  const [ready, setReady] = useState(false);
+  const [phase, setPhase] = useState<Phase>(0);
   const [leaving, setLeaving] = useState(false);
-  const timerRef = useRef<number | null>(null);
+
+  const timersRef = useRef<number[]>([]);
+  const navFallbackRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Force the browser to paint once before starting intro animations
-    const t = window.setTimeout(() => setReady(true), 250);
-    return () => window.clearTimeout(t);
+    // Cleanup helper
+    const clearAll = () => {
+      timersRef.current.forEach((t) => window.clearTimeout(t));
+      timersRef.current = [];
+      if (navFallbackRef.current) window.clearTimeout(navFallbackRef.current);
+      navFallbackRef.current = null;
+    };
+
+    clearAll();
+    setLeaving(false);
+    setPhase(0);
+
+    // Kick animations after first paint
+    timersRef.current.push(
+      window.setTimeout(() => setPhase(1), 50),
+      window.setTimeout(() => setPhase(2), 900),
+      window.setTimeout(() => setPhase(3), 1250),
+      window.setTimeout(() => setPhase(4), 1550)
+    );
+
+    return clearAll;
   }, []);
 
   function goToLogin() {
     if (leaving) return;
     setLeaving(true);
 
-    // Let the slide animation be visible before route change
-    timerRef.current = window.setTimeout(() => {
+    // Fallback in case transitionend doesn't fire (e.g. weird browser edge cases)
+    navFallbackRef.current = window.setTimeout(() => {
       router.push("/auth/login?from=landing");
-    }, 1400);
+    }, 7600);
   }
 
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) window.clearTimeout(timerRef.current);
-    };
-  }, []);
+  function onLetterTransitionEnd(e: React.TransitionEvent<HTMLDivElement>) {
+    if (!leaving) return;
+    if (e.propertyName !== "transform") return;
+
+    // If the fallback timer exists, cancel it and navigate now
+    if (navFallbackRef.current) {
+      window.clearTimeout(navFallbackRef.current);
+      navFallbackRef.current = null;
+    }
+    router.push("/auth/login?from=landing");
+  }
+
+  const className = [
+    styles.stage,
+    phase >= 1 ? styles.phase1 : "",
+    phase >= 2 ? styles.phase2 : "",
+    phase >= 3 ? styles.phase3 : "",
+    phase >= 4 ? styles.phase4 : "",
+    leaving ? styles.leaving : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <main
-      className={[
-        styles.stage,
-        ready ? styles.ready : "",
-        leaving ? styles.leaving : "",
-      ].join(" ")}
-    >
-      {/* Top-right hub button */}
+    <main className={className}>
       <div className={styles.hubBtn}>
         <a href={HUB_URL} target="_blank" rel="noreferrer">
           ⟵ Back to hub
         </a>
       </div>
 
-      {/* Background */}
       <div className={styles.bg} aria-hidden="true">
         <Image src={BG_IMAGE_SRC} alt="" fill priority className={styles.bgImg} />
         <div className={styles.bgVignette} />
-        {/* Guarantees "black -> dark" on entry */}
         <div className={styles.blackFade} />
       </div>
 
-      {/* Sparkles overlay */}
       <div className={styles.sparkles} aria-hidden="true" />
 
-      {/* Letter overlay (only animates in on leaving) */}
-      <div className={styles.letterOverlay} aria-hidden="true">
+      <div className={styles.letterOverlay} aria-hidden="true" onTransitionEnd={onLetterTransitionEnd}>
         <img src={LETTER_IMAGE_SRC} alt="" className={styles.letterImg} />
       </div>
 
-      {/* Content */}
       <div className={styles.content}>
         <section className={styles.card}>
           <h1 className={styles.title}>WWRPG</h1>
-
           <p className={styles.tagline}>
             Your Wizarding World tabletop companion — campaigns, characters, combat decks, and DM tools.
           </p>
 
           <div className={styles.actions}>
             <button className={styles.primaryBtn} onClick={goToLogin}>
-              <img
-                src={LETTER_SMALL_IMAGE_SRC}
-                alt=""
-                className={styles.letterMiniImg}
-                aria-hidden="true"
-              />
+              <img src={LETTER_SMALL_IMAGE_SRC} alt="" className={styles.letterMiniImg} />
               <span>Enter (Login)</span>
             </button>
           </div>
