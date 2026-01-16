@@ -2,15 +2,48 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import styles from "./login.module.css";
 
-const BG_IMAGE_SRC = "/landing/hogwarts-like-castle.jpg"; // same image as landing
-const LETTER_IMAGE_SRC = "/landing/acceptance-letter.png"; // same letter image as landing
+const BG_IMAGE_SRC = "/landing/hogwarts-like-castle.jpg";
+const LETTER_IMAGE_SRC = "/landing/acceptance-letter.png";
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={<LoginFallback />}>
+      <LoginInner />
+    </Suspense>
+  );
+}
+
+function LoginFallback() {
+  // A simple fallback UI while search params are resolving during prerender/CSR bailout.
+  return (
+    <main className={styles.stage}>
+      <div className={styles.bg} aria-hidden="true">
+        <Image src={BG_IMAGE_SRC} alt="" fill priority className={styles.bgImg} />
+        <div className={styles.bgVignette} />
+      </div>
+
+      <div className={styles.sparkles} aria-hidden="true" />
+
+      <div className={styles.content}>
+        <form className={styles.formCard}>
+          <h1 className={styles.h1}>Log in</h1>
+          <p style={{ opacity: 0.85, fontSize: 14, margin: 0 }}>Loading…</p>
+
+          <div className={styles.back}>
+            <Link href="/">← Back</Link>
+          </div>
+        </form>
+      </div>
+    </main>
+  );
+}
+
+function LoginInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = createSupabaseBrowserClient();
@@ -39,17 +72,14 @@ export default function LoginPage() {
 
   return (
     <main className={styles.stage}>
-      {/* Background */}
       <div className={styles.bg} aria-hidden="true">
         <Image src={BG_IMAGE_SRC} alt="" fill priority className={styles.bgImg} />
         <div className={styles.bgVignette} />
       </div>
 
-      {/* Sparkles overlay */}
       <div className={styles.sparkles} aria-hidden="true" />
 
       <div className={styles.content}>
-        {/* Letter background shows when arriving from landing (or you can make this always true later) */}
         {fromLanding && (
           <div className={styles.letterBg} aria-hidden="true">
             <img src={LETTER_IMAGE_SRC} alt="" className={styles.letterBgImg} />
