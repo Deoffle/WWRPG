@@ -1,12 +1,21 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import styles from "./login.module.css";
+
+const BG_IMAGE_SRC = "/landing/hogwarts-like-castle.jpg"; // same image as landing
+const LETTER_IMAGE_SRC = "/landing/acceptance-letter.png"; // same letter image as landing
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createSupabaseBrowserClient();
+
+  const fromLanding = searchParams.get("from") === "landing";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,40 +38,62 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-6">
-      <form onSubmit={onSubmit} className="w-full max-w-sm space-y-4 border rounded-xl p-6">
-        <h1 className="text-xl font-semibold">Log in</h1>
+    <main className={styles.stage}>
+      {/* Background */}
+      <div className={styles.bg} aria-hidden="true">
+        <Image src={BG_IMAGE_SRC} alt="" fill priority className={styles.bgImg} />
+        <div className={styles.bgVignette} />
+      </div>
 
-        <label className="block space-y-1">
-          <span className="text-sm">Email</span>
-          <input
-            className="w-full border rounded-md p-2"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            autoComplete="email"
-            required
-          />
-        </label>
+      {/* Sparkles overlay */}
+      <div className={styles.sparkles} aria-hidden="true" />
 
-        <label className="block space-y-1">
-          <span className="text-sm">Password</span>
-          <input
-            className="w-full border rounded-md p-2"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            autoComplete="current-password"
-            required
-          />
-        </label>
+      <div className={styles.content}>
+        {/* Letter background shows when arriving from landing (or you can make this always true later) */}
+        {fromLanding && (
+          <div className={styles.letterBg} aria-hidden="true">
+            <img src={LETTER_IMAGE_SRC} alt="" className={styles.letterBgImg} />
+          </div>
+        )}
 
-        {err && <p className="text-sm text-red-600">{err}</p>}
+        <form onSubmit={onSubmit} className={styles.formCard}>
+          <h1 className={styles.h1}>Log in</h1>
 
-        <button className="w-full rounded-md border p-2 font-medium" disabled={loading} type="submit">
-          {loading ? "Logging in…" : "Log in"}
-        </button>
-      </form>
+          <label className={styles.label}>
+            <span>Email</span>
+            <input
+              className={styles.input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              autoComplete="email"
+              required
+            />
+          </label>
+
+          <label className={styles.label}>
+            <span>Password</span>
+            <input
+              className={styles.input}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              autoComplete="current-password"
+              required
+            />
+          </label>
+
+          {err && <p className={styles.err}>{err}</p>}
+
+          <button className={styles.btn} disabled={loading} type="submit">
+            {loading ? "Logging in…" : "Log in"}
+          </button>
+
+          <div className={styles.back}>
+            <Link href="/">← Back</Link>
+          </div>
+        </form>
+      </div>
     </main>
   );
 }

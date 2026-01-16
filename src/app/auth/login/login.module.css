@@ -1,0 +1,192 @@
+/* src/app/auth/login/login.module.css */
+
+.stage {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+/* Background image layer */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: saturate(1.05);
+}
+
+.bgVignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top, rgba(20, 30, 60, 0.30), rgba(0, 0, 0, 0.82)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.88));
+}
+
+/* Sparkles overlay */
+.sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sparkles::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -10%;
+  width: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(120, 170, 255, 0.8);
+  box-shadow:
+    10vw 15vh rgba(120, 170, 255, 0.75),
+    18vw 42vh rgba(120, 170, 255, 0.55),
+    25vw 22vh rgba(120, 170, 255, 0.65),
+    32vw 70vh rgba(120, 170, 255, 0.50),
+    40vw 30vh rgba(120, 170, 255, 0.70),
+    48vw 55vh rgba(120, 170, 255, 0.55),
+    55vw 18vh rgba(120, 170, 255, 0.65),
+    62vw 62vh rgba(120, 170, 255, 0.55),
+    70vw 25vh rgba(120, 170, 255, 0.70),
+    78vw 48vh rgba(120, 170, 255, 0.50),
+    85vw 68vh rgba(120, 170, 255, 0.60),
+    92vw 35vh rgba(120, 170, 255, 0.55);
+  opacity: 0.9;
+  animation: twinkle 3.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(120, 170, 255, 0.35));
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* Big letter background (optional) */
+.letterBg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-1deg);
+  width: min(900px, 98vw);
+  height: min(980px, 150vh);
+  z-index: 1;
+  opacity: 0.9;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+.letterBgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 70px rgba(0, 0, 0, 0.65));
+}
+
+.formCard {
+  width: min(420px, 92vw);
+  border-radius: 18px;
+  padding: 22px;
+  background: rgba(10, 14, 28, 0.55);
+  border: 1px solid rgba(120, 170, 255, 0.18);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  z-index: 3;
+}
+
+.h1 {
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+.label {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.label span {
+  font-size: 13px;
+  color: rgba(235, 245, 255, 0.88);
+}
+
+.input {
+  width: 100%;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(120, 170, 255, 0.18);
+  background: rgba(10, 14, 28, 0.45);
+  color: rgba(255, 255, 255, 0.95);
+  outline: none;
+}
+
+.input:focus {
+  border-color: rgba(120, 170, 255, 0.40);
+  box-shadow: 0 0 0 3px rgba(120, 170, 255, 0.10);
+}
+
+.err {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: rgba(255, 130, 130, 0.95);
+}
+
+.btn {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(120, 170, 255, 0.30);
+  background: rgba(20, 28, 52, 0.60);
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.back {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.back a {
+  color: rgba(200, 220, 255, 0.90);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back a:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkles::before {
+    animation: none !important;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.55; transform: translate(0, 0); }
+  50%      { opacity: 1; transform: translate(10px, 6px); }
+}

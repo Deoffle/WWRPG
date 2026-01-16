@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import DmQuestLogPanel from "./quest-log-panel";
+import DmNotesPanel from "./dm-notes-panel";
 
 export default function DmReferencePanel({ campaignId }: { campaignId: string }) {
-  const [tab, setTab] = useState<"quest">("quest");
+  const [tab, setTab] = useState<"quest" | "notes">("quest");
 
   return (
     <aside className="w-full lg:w-[420px] shrink-0">
@@ -14,14 +15,18 @@ export default function DmReferencePanel({ campaignId }: { campaignId: string })
           <div className="text-[11px] text-gray-500">DM tools</div>
         </div>
 
-        <div className="mt-2 grid grid-cols-1 gap-2">
+        <div className="mt-2 grid grid-cols-2 gap-2">
           <TabButton active={tab === "quest"} onClick={() => setTab("quest")}>
             Quest log
+          </TabButton>
+          <TabButton active={tab === "notes"} onClick={() => setTab("notes")}>
+            DM Notes
           </TabButton>
         </div>
 
         <div className="mt-3 border rounded-xl p-3 overflow-y-auto max-h-[calc(100vh-10rem)]">
           {tab === "quest" ? <DmQuestLogPanel campaignId={campaignId} /> : null}
+          {tab === "notes" ? <DmNotesPanel campaignId={campaignId} /> : null}
         </div>
       </div>
     </aside>
